@@ -6,8 +6,8 @@
         <groupId>com.upsetcode</groupId>
         <artifactId>springboot-learn</artifactId>
         <version>0.0.1-SNAPSHOT</version>
-        <relativePath/> <!-- lookup parent from repository -->
     </parent>
+
     <groupId>com.tamecode</groupId>
     <artifactId>lesson1</artifactId>
     <version>0.0.1-SNAPSHOT</version>
