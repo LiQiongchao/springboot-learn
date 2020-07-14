@@ -12,15 +12,15 @@ import javax.servlet.http.HttpServletRequest;
 public class MyServletRequestListener implements ServletRequestListener {
 
     @Override
-    public void requestDestroyed(ServletRequestEvent sre) {
-        HttpServletRequest request = (HttpServletRequest) sre.getServletRequest();
-        ServletContext servletContext = request.getServletContext();
+    public void requestInitialized(ServletRequestEvent sre) {
+        ServletContext servletContext = sre.getServletContext();
         servletContext.log("listener request was initialized!");
     }
 
     @Override
-    public void requestInitialized(ServletRequestEvent sre) {
-        ServletContext servletContext = sre.getServletContext();
+    public void requestDestroyed(ServletRequestEvent sre) {
+        HttpServletRequest request = (HttpServletRequest) sre.getServletRequest();
+        ServletContext servletContext = request.getServletContext();
         servletContext.log("listener request was destroyed!");
     }
 
