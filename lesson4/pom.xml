@@ -8,9 +8,9 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <groupId>com.tamecode</groupId>
-    <artifactId>lesson04</artifactId>
+    <artifactId>lesson4</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>lesson04</name>
+    <name>lesson4</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
