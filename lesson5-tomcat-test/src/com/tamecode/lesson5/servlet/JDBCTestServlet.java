@@ -30,6 +30,10 @@ public class JDBCTestServlet extends HttpServlet {
             Context context = new InitialContext();
             Context envContext = (Context) context.lookup("java:comp/env");
             dataSource = (DataSource) envContext.lookup("jdbc/TestDB");
+
+            // 使用env
+            String bean = (String) envContext.lookup("Bean");
+            System.out.println(bean);
         } catch (NamingException e) {
             e.printStackTrace();
         }
