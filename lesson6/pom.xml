@@ -15,6 +15,7 @@
 
     <properties>
         <java.version>1.8</java.version>
+        <charset>UTF-8</charset>
     </properties>
 
     <dependencies>
@@ -31,6 +32,10 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
