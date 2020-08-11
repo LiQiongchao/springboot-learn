@@ -1,13 +1,18 @@
 package com.tamecode.lesson6.controller;
 
 import com.tamecode.lesson6.domain.Explore;
+import com.tamecode.lesson6.service.ExploreService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.web.bind.annotation.*;
 
 import javax.sql.DataSource;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @Author: LiQiongchao
@@ -19,6 +24,19 @@ public class JDBCController {
 
     private final DataSource dataSource;
 
+    private final JdbcTemplate jdbcTemplate;
+
+    private final ExploreService exploreService;
+
+    /**
+     * 使用原生的JDBC dataSource查询
+     * Statement 的execute() 与 executeUpdate()的区别（通过查看注释说明得知）
+     *      execute: 一个是用于返回bool类型的操作，如DDL等
+     *      executeUpdate: 一般用于用于 insert, update 返回的是影响的行业。
+     *
+     * @param id
+     * @return
+     */
     @GetMapping(value = "/jdbc/explore", produces = {"application/json"})
     public Object getZhiHusByJdbc(@RequestParam(value = "id", defaultValue = "1") String id) {
 
@@ -56,6 +74,19 @@ public class JDBCController {
             }
         }
         return explore;
+    }
+
+    /**
+     * 使用Spring提供的 {@link JdbcTemplate}（封装的连接池，封装了常用方法）保存
+     * @param explore
+     * @return
+     */
+    @PostMapping("/explore")
+    public Map<String, Object> addExplore(@RequestBody Explore explore) {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("success", exploreService.save(explore));
+        map.put("success", exploreService.save2(explore));
+        return map;
     }
 
 }
