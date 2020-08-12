@@ -7,10 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,6 +24,30 @@ public class JDBCController {
     private final JdbcTemplate jdbcTemplate;
 
     private final ExploreService exploreService;
+
+
+    /**
+     * 查询当前的连接是否支持事务
+     * @return
+     */
+    @GetMapping("/jdbc/meta/transaction/supported")
+    public boolean supportedTransaction() {
+        boolean supported = false;
+        Connection connection = null;
+
+        try {
+            connection = dataSource.getConnection();
+
+            DatabaseMetaData databaseMetaData = connection.getMetaData();
+
+            supported = databaseMetaData.supportsTransactions();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return supported;
+    }
+
 
     /**
      * 使用原生的JDBC dataSource查询
@@ -77,6 +98,69 @@ public class JDBCController {
     }
 
     /**
+     * 手动加事务
+     *
+     * @param id
+     * @return
+     */
+    @GetMapping(value = "/jdbc/explore/tr", produces = {"application/json"})
+    public Object getZhiHusByJdbcWithTr(@RequestParam(value = "id", defaultValue = "1") String id) {
+
+        Explore explore = new Explore();
+        Connection connection = null;
+        Savepoint savepoint = null;
+        try {
+            connection = dataSource.getConnection();
+            // 手动提交事务，模拟JDBC自动处理事务
+            connection.setAutoCommit(false);
+            savepoint = connection.setSavepoint();
+
+            // 方法一会有SQL注入的问题
+//            Statement statement = connection.createStatement();
+//            ResultSet resultSet = statement.executeQuery("select * from zh_explore where id = " + id);
+
+            // 方法二，不会有SQL注入的问题
+            PreparedStatement statement = connection.prepareStatement("select * from zh_explore where id = ?");
+            statement.setString(1, id);
+
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                String name;
+                explore.setName(name = resultSet.getString("name"));
+                System.out.println("查询到：" + name);
+                explore.setId(resultSet.getLong("id"));
+                explore.setUrl(resultSet.getString("url"));
+            }
+
+            // 提交事务
+            connection.commit();
+
+        } catch (SQLException e) {
+            if (connection == null) {
+                try {
+                    // 还原事务
+                    connection.rollback(savepoint);
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+            e.printStackTrace();
+        } finally {
+            if (connection != null) {
+                try {
+                    // 需要再改成自动提交事务
+                    connection.setAutoCommit(true);
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return explore;
+    }
+
+    /**
      * 使用Spring提供的 {@link JdbcTemplate}（封装的连接池，封装了常用方法）保存
      * @param explore
      * @return
@@ -85,7 +169,7 @@ public class JDBCController {
     public Map<String, Object> addExplore(@RequestBody Explore explore) {
         HashMap<String, Object> map = new HashMap<>();
         map.put("success", exploreService.save(explore));
-        map.put("success", exploreService.save2(explore));
+//        map.put("success", exploreService.save2(explore));
         return map;
     }
 

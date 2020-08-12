@@ -8,7 +8,10 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCallback;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -25,7 +28,7 @@ public class ExploreServiceImpl implements ExploreService {
 
     private final JdbcTemplate jdbcTemplate;
 
-    @Transactional
+    @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.SERIALIZABLE)
     @Override
     public Boolean save(Explore explore) {
         return jdbcTemplate.execute("insert into zh_explore(name, url) values(?, ?)", new PreparedStatementCallback<Integer>() {
@@ -40,6 +43,8 @@ public class ExploreServiceImpl implements ExploreService {
 
     @Override
     public Boolean save2(Explore explore) {
+        DefaultTransactionDefinition transactionDefinition = new DefaultTransactionDefinition();
+
         return null;
     }
 }
