@@ -3,12 +3,16 @@ package com.tamecode.lesson6.controller;
 import com.tamecode.lesson6.domain.Explore;
 import com.tamecode.lesson6.service.ExploreService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.StatementCallback;
 import org.springframework.web.bind.annotation.*;
 
 import javax.sql.DataSource;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -46,6 +50,48 @@ public class JDBCController {
             e.printStackTrace();
         }
         return supported;
+    }
+
+
+
+
+    /**
+     * 在不知道字段的情况下查询所有的字段及映射
+     * @return
+     */
+    @GetMapping(value = "/explores", produces = {"application/json;charset=utf-8"})
+    public List<Map<String, Object>> getExplores() {
+
+        return jdbcTemplate.execute(new StatementCallback<List<Map<String, Object>>>() {
+            @Override
+            public List<Map<String, Object>> doInStatement(Statement statement) throws SQLException, DataAccessException {
+                ResultSet resultSet = statement.executeQuery("SELECT * FROM zh_explore");
+                // 元数据
+                ResultSetMetaData metaData = resultSet.getMetaData();
+                // 列的数量
+                int columnCount = metaData.getColumnCount();
+                List<String> columnList = new ArrayList<>(columnCount);
+                for (int i = 1; i <= columnCount; i++) {
+                    // the first column is 1, the second is 2
+                    String columnName = metaData.getColumnName(i);
+                    columnList.add(columnName);
+                }
+
+                List<Map<String, Object>> list = new ArrayList<>(columnCount);
+                while (resultSet.next()) {
+
+                    Map<String, Object> map = new HashMap<>();
+
+                    for (String column : columnList) {
+                        map.put(column, resultSet.getObject(column));
+                    }
+
+                    list.add(map);
+                }
+
+                return list;
+            }
+        });
     }
 
 
