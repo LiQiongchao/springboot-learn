@@ -1,7 +1,10 @@
 package com.tamecode.lesson7.entity;
 
+import lombok.ToString;
+
 import java.util.Date;
 
+@ToString
 public class ZhExplore {
     /**
      *

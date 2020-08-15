@@ -55,6 +55,7 @@
 
     <mappers>
         <mapper resource="mybatis/mapper/ZhExploreDemoMapper.xml"></mapper>
+        <mapper resource="mybatis/mapper/ZhExploreMapper.xml"></mapper>
     </mappers>
 
 </configuration>
