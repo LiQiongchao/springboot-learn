@@ -1,0 +1,36 @@
+<!DOCTYPE generatorConfiguration PUBLIC
+        "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+
+    <!-- 导入配置文件 -->
+    <properties resource="mybatis/generator/mybatis-generator-config.properties"/>
+
+    <context id="ExploreGenerator" targetRuntime="MyBatis3">
+
+        <!-- 数据库连接 -->
+        <jdbcConnection driverClass="${driver}" connectionURL="${url}"
+                        userId="${username}" password="${password}"/>
+
+        <!-- Java 模型对象生辰器 -->
+        <javaModelGenerator targetPackage="com.tamecode.lesson7.entity" targetProject="${user.dir}/src/main/java"/>
+
+        <!-- SQL Mapper XML 生成器 -->
+        <sqlMapGenerator targetPackage="mybatis.mapper" targetProject="${user.dir}/src/main/resources"></sqlMapGenerator>
+
+        <!-- SQL Mapper Java 接口 -->
+        <javaClientGenerator targetPackage="com.tamecode.lesson7.mapper"
+                             targetProject="${user.dir}/src/main/java" type="XMLMAPPER">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+        <!-- 逆向生成的表 -->
+        <table tableName="zh_explore" domainObjectName="ZhExplore">
+
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+            <!-- 需要特别声明的字段，其他的按驼峰命名生成 -->
+            <columnOverride column="name" property="exploreName"/>
+
+        </table>
+    </context>
+</generatorConfiguration>

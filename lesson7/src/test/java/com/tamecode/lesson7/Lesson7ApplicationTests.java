@@ -8,6 +8,8 @@ class Lesson7ApplicationTests {
 
     @Test
     void contextLoads() {
+        System.out.println(System.getProperty("basedir"));
+        System.out.println(System.getProperty("user.dir"));
     }
 
 }

@@ -10,8 +10,11 @@ import lombok.Data;
 public class ZhExploreDemo {
 
     private Long id;
-    private String name;
+
+    private String exploreName;
+
     private String url;
+
     private String digest;
 
 }

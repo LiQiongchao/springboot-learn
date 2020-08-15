@@ -61,6 +61,26 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+
+            <!-- 配置逆向工程 -->
+            <plugin>
+                <groupId>org.mybatis.generator</groupId>
+                <artifactId>mybatis-generator-maven-plugin</artifactId>
+                <version>1.4.0</version>
+                <configuration>
+                    <!-- 配置逆向工程的位置。 默认：${basedir}/src/main/resources/generatorConfig.xml -->
+                    <configurationFile>${basedir}/src/main/resources/mybatis/generator/mybatis-generator-config.xml</configurationFile>
+                </configuration>
+                <dependencies>
+                    <!-- 逆向工程需要连接MySQL数据库 -->
+                    <dependency>
+                        <groupId>mysql</groupId>
+                        <artifactId>mysql-connector-java</artifactId>
+                        <version>8.0.20</version>
+                        <scope>runtime</scope>
+                    </dependency>
+                </dependencies>
+            </plugin>
         </plugins>
     </build>
 

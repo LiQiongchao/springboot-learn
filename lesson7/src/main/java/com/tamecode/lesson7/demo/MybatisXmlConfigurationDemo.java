@@ -21,6 +21,9 @@ public class MybatisXmlConfigurationDemo {
 
     public static void main(String[] args) throws IOException {
 
+        System.out.println(System.getProperty("basedir")); // null
+        System.out.println(System.getProperty("user.dir")); // F:\WorkSpaces\practise-projects\springboot-learn
+
         ResourceLoader resourceLoader = new DefaultResourceLoader();
 
         Resource resource = resourceLoader.getResource("classpath:/mybatis/mybatis-config.xml");
@@ -34,7 +37,7 @@ public class MybatisXmlConfigurationDemo {
         SqlSessionFactoryBuilder sqlSessionFactoryBuilder = new SqlSessionFactoryBuilder();
         SqlSessionFactory sqlSessionFactory = sqlSessionFactoryBuilder.build(reader, "dev", new Properties());
         SqlSession sqlSession = sqlSessionFactory.openSession();
-        ZhExploreDemo explore = sqlSession.selectOne("com.tamecode.lesson7.mapper.ZhExploreDemo.selectExploreDemo", 1);
+        ZhExploreDemo explore = sqlSession.selectOne("com.tamecode.lesson7.mapper.ZhExploreDemo.selectExploreDemo", 17);
         System.out.println(explore);
         sqlSession.close();
     }

@@ -5,15 +5,16 @@
 
 <mapper namespace="com.tamecode.lesson7.mapper.ZhExploreDemo">
 
-    <!-- 默认可以转换的是否可以不写，如 explore_name -> exploreName
+    <!-- 默认可以转换的可以做映射，如 explore_name -> exploreName
     mybatis-config.xml 中
     <typeAlias type="com.tamecode.lesson7.entity.ZhExploreDemo" alias="exploreDemo"/>
     -->
     <resultMap id="exploreMap" type="exploreDemo">
         <id property="id" column="id"/>
-        <result property="name" column="name"/>
+        <result property="exploreName" column="name"/>
     </resultMap>
 
+    <!-- 可以没有接口类，也能查询 -->
     <select id="selectExploreDemo" resultMap="exploreMap" parameterType="int">
     SELECT id, name, url, digest FROM zh_explore WHERE id = #{id}
   </select>
