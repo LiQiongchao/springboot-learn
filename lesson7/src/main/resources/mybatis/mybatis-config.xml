@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<!--
+ see more: https://mybatis.org/mybatis-3/zh/configuration.html
+ plugins: 配置拦截器
+ -->
+<configuration>
+
+    <!-- 配置属性，以便在datasource中引用 -->
+    <properties resource="mybatis/mybatis-config.properties">
+        <property name="hello" value="world"/>
+    </properties>
+
+    <!--
+        MyBatis参数调整
+        doc: https://mybatis.org/mybatis-3/zh/configuration.html#settings
+    -->
+    <settings>
+        <setting name="cacheEnabled" value="true"/>
+    </settings>
+    
+    <typeAliases>
+        <!-- 实现自己数据库厂商标识的别名注册 -->
+        <typeAlias type="com.tamecode.lesson7.mapping.ChaoVendorDatabaseIdProvider" alias="CHAO_DB_VENDOR"/>
+        <typeAlias type="com.tamecode.lesson7.entity.ZhExploreDemo" alias="exploreDemo"/>
+    </typeAliases>
+
+    
+    <environments default="dev">
+        <environment id="dev">
+            <!-- 使用Spring + MyBatis时，Spring的配置会覆盖transactionManager的配置 -->
+            <transactionManager type="JDBC"/>
+
+            <!-- type="[UNPOOLED|POOLED|JNDI]" -->
+            <dataSource type="POOLED">
+                <property name="driver" value="${driver}"/>
+                <property name="url" value="${url}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
+            </dataSource>
+
+        </environment>
+    </environments>
+
+    <!-- 数据库厂商标识
+    默认别名是 DB_VENDOR，如果不使用默认别名，需要在 typeAliases 中配置，然后实现 DB_VENDOR 对应的类
+    org.apache.ibatis.builder.xml.XMLConfigBuilder.databaseIdProviderElement#databaseIdProviderElement()
+    -->
+    <databaseIdProvider type="CHAO_DB_VENDOR">
+        <property name="MySQL" value="mysql"/>
+    </databaseIdProvider>
+
+    <mappers>
+        <mapper resource="mybatis/mapper/ZhExploreDemoMapper.xml"></mapper>
+    </mappers>
+
+</configuration>
+
+
+
+

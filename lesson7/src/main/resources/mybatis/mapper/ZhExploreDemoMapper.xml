@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tamecode.lesson7.mapper.ZhExploreDemo">
+
+    <!-- 默认可以转换的是否可以不写，如 explore_name -> exploreName
+    mybatis-config.xml 中
+    <typeAlias type="com.tamecode.lesson7.entity.ZhExploreDemo" alias="exploreDemo"/>
+    -->
+    <resultMap id="exploreMap" type="exploreDemo">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+    </resultMap>
+
+    <select id="selectExploreDemo" resultMap="exploreMap" parameterType="int">
+    SELECT id, name, url, digest FROM zh_explore WHERE id = #{id}
+  </select>
+
+
+</mapper>
