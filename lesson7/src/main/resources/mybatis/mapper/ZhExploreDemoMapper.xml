@@ -12,6 +12,7 @@
     <resultMap id="exploreMap" type="exploreDemo">
         <id property="id" column="id"/>
         <result property="exploreName" column="name"/>
+        <result property="digest" column="digest" typeHandler="com.tamecode.lesson7.handler.DigestTypeHandler"/>
     </resultMap>
 
     <!-- 可以没有接口类，也能查询 -->

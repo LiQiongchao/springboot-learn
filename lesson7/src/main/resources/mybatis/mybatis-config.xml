@@ -62,7 +62,7 @@
         <mapper resource="mybatis/mapper/ZhExploreDemoMapper.xml"></mapper>
         <mapper resource="mybatis/mapper/ZhExploreMapper.xml"></mapper>
 
-        <mapper class="com.tamecode.lesson7.mapper.ZhExploreAnnotationMapper"></mapper>
+<!--        <mapper class="com.tamecode.lesson7.mapper.ZhExploreAnnotationMapper"></mapper>-->
     </mappers>
 
 </configuration>
