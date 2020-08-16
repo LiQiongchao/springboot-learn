@@ -30,6 +30,7 @@ public class MyBatisAnnotationConfigurationDemo {
         ZhExploreDemo zhExploreDemo = zhExploreAnnotationMapper.selectExploreById(17);
 
         System.out.println(zhExploreDemo);
+        // ZhExploreDemo(id=17, exploreName=NBA2, url=www.nba.com, digest=ExploreDigest(id=12, desc=no desc))
 
         sqlSession.close();
     }

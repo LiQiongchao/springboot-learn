@@ -29,6 +29,7 @@
     </typeAliases>
 
     <typeHandlers>
+        <!-- 注册自定义Json解析的 TypeHandler -->
         <typeHandler handler="com.tamecode.lesson7.handler.DigestTypeHandler"/>
     </typeHandlers>
 
