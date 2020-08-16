@@ -15,6 +15,7 @@ public class ZhExploreDemo {
 
     private String url;
 
-    private String digest;
+//    private String digest;
+    private ExploreDigest digest;
 
 }

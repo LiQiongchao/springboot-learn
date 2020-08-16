@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Properties;
 
 /**
+ * 使用Generator生成的代码查询
  * @Author: LiQiongchao
  * @Date: 2020/8/15 19:40
  */

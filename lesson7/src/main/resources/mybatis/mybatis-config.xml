@@ -28,6 +28,10 @@
         <typeAlias type="com.tamecode.lesson7.entity.ZhExploreDemo" alias="exploreDemo"/>
     </typeAliases>
 
+    <typeHandlers>
+        <typeHandler handler="com.tamecode.lesson7.handler.DigestTypeHandler"/>
+    </typeHandlers>
+
     
     <environments default="dev">
         <environment id="dev">
@@ -56,6 +60,8 @@
     <mappers>
         <mapper resource="mybatis/mapper/ZhExploreDemoMapper.xml"></mapper>
         <mapper resource="mybatis/mapper/ZhExploreMapper.xml"></mapper>
+
+        <mapper class="com.tamecode.lesson7.mapper.ZhExploreAnnotationMapper"></mapper>
     </mappers>
 
 </configuration>
