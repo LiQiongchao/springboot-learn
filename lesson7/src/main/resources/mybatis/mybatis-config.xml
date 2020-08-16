@@ -21,10 +21,11 @@
     <settings>
         <setting name="cacheEnabled" value="true"/>
     </settings>
-    
+
     <typeAliases>
         <!-- 实现自己数据库厂商标识的别名注册 -->
         <typeAlias type="com.tamecode.lesson7.mapping.ChaoVendorDatabaseIdProvider" alias="CHAO_DB_VENDOR"/>
+        <!-- 配置别名，以便在mybatis-config.xml中直接使用别名 -->
         <typeAlias type="com.tamecode.lesson7.entity.ZhExploreDemo" alias="exploreDemo"/>
     </typeAliases>
 
@@ -33,7 +34,7 @@
         <typeHandler handler="com.tamecode.lesson7.handler.DigestTypeHandler"/>
     </typeHandlers>
 
-    
+
     <environments default="dev">
         <environment id="dev">
             <!-- 使用Spring + MyBatis时，Spring的配置会覆盖transactionManager的配置 -->
@@ -62,11 +63,7 @@
         <mapper resource="mybatis/mapper/ZhExploreDemoMapper.xml"></mapper>
         <mapper resource="mybatis/mapper/ZhExploreMapper.xml"></mapper>
 
-<!--        <mapper class="com.tamecode.lesson7.mapper.ZhExploreAnnotationMapper"></mapper>-->
+        <mapper class="com.tamecode.lesson7.mapper.ZhExploreAnnotationMapper"></mapper>
     </mappers>
 
 </configuration>
-
-
-
-

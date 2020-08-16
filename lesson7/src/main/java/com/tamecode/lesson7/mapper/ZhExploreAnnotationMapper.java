@@ -9,6 +9,8 @@ import org.apache.ibatis.annotations.Select;
 
 /**
  * 使用注解模式
+ * 如果在SpringBoot中使用，就不用在mybatis-config.xml中配置映射了，会自动扫描。否则需要在配置文件中配置。
+ *
  * @ResultMap("exploreMap") 中指定的id是XML已经存在的ResultMap的id
  *
  *
