@@ -1,6 +1,7 @@
 package com.tamecode.lesson8.controller;
 
 import com.tamecode.lesson8.entity.Customer;
+import com.tamecode.lesson8.repository.CustomerRepository;
 import com.tamecode.lesson8.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,6 +22,9 @@ public class CustomerController {
     @Autowired
     private CustomerService customerService;
 
+    @Autowired
+    private CustomerRepository customerRepository;
+
     /**
      * 使用 EntityManager 操作
      * @param customer
@@ -35,7 +39,7 @@ public class CustomerController {
 
     @RequestMapping("all")
     public List<Customer> findAll() {
-        return null;
+        return customerRepository.findAll();
     }
 
 }

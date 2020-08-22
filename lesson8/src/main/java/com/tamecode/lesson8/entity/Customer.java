@@ -18,7 +18,7 @@ import java.util.Collection;
 public class Customer {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     // 指定映射到数据库的字符长度
