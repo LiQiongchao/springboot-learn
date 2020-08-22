@@ -27,4 +27,7 @@ public class Customer {
     @OneToOne(orphanRemoval = true)
     private CreditCard creditCard;
 
+    @ManyToOne
+    private Store store;
+
 }
