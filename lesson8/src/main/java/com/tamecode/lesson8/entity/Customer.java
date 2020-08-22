@@ -3,6 +3,7 @@ package com.tamecode.lesson8.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 /**
  * 客户实体类
@@ -29,5 +30,8 @@ public class Customer {
 
     @ManyToOne
     private Store store;
+
+    @ManyToMany
+    private Collection<Book> books;
 
 }
