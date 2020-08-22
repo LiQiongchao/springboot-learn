@@ -1,5 +1,6 @@
 package com.tamecode.lesson8.entity;
 
+import com.tamecode.lesson8.listener.CustomerListener;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -15,6 +16,7 @@ import java.util.Collection;
 // 通过属性注入，不通过方法注入
 @Access(value = AccessType.FIELD)
 @Table(name = "sb_jpa_customers")
+@EntityListeners(value = {CustomerListener.class})
 public class Customer {
 
     @Id
