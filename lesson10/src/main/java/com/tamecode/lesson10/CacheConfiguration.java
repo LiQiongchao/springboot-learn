@@ -7,6 +7,7 @@ import org.springframework.cache.support.SimpleCacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.Arrays;
 import java.util.Collections;
 
 /**
@@ -24,7 +25,8 @@ public class CacheConfiguration {
         SimpleCacheManager simpleCacheManager = new SimpleCacheManager();
         // 定义缓存的Map
         ConcurrentMapCache cache = new ConcurrentMapCache("cache-01");
-        simpleCacheManager.setCaches(Collections.singletonList(cache));
+        ConcurrentMapCache persons = new ConcurrentMapCache("persons");
+        simpleCacheManager.setCaches(Arrays.asList(cache, persons));
         return simpleCacheManager;
     }
 
