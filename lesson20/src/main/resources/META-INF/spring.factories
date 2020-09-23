@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.tamecode.lesson20.autoconfigure.PersonAutoConfiguration
