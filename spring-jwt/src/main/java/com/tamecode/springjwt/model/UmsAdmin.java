@@ -1,6 +1,8 @@
 package com.tamecode.springjwt.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
@@ -11,6 +13,8 @@ import java.util.Date;
  * @date 2020/10/16 15:00
  */
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class UmsAdmin {
 
     private Long id;

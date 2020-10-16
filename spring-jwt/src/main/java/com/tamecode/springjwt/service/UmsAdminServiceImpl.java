@@ -16,6 +16,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
@@ -32,6 +34,20 @@ public class UmsAdminServiceImpl implements UmsAdminService {
     private static volatile LongAdder gerId = new LongAdder();
     private static volatile ConcurrentHashMap<String, UmsAdmin> userMap = new ConcurrentHashMap<>();
     private static volatile ConcurrentHashMap<Long, List<UmsPermission>> permissionMap = new ConcurrentHashMap<>();
+
+    static {
+        userMap.put("admin", new UmsAdmin(getUmsAdminId(), "admin", "123456", 1, new Date()));
+        userMap.put("test", new UmsAdmin(getUmsAdminId(), "test", "1234567", 1, new Date()));
+        permissionMap.put(1L, Arrays.asList(
+                new UmsPermission("pms:brand:read")
+                , new UmsPermission("pms:brand:create")
+                , new UmsPermission("pms:brand:update")
+                , new UmsPermission("pms:brand:delete")
+        ));
+        permissionMap.put(2L, Collections.singletonList(
+                new UmsPermission("pms:brand:read")
+        ));
+    }
 
     @Autowired
     private UserDetailsService userDetailsService;
@@ -51,7 +67,7 @@ public class UmsAdminServiceImpl implements UmsAdminService {
     public UmsAdmin register(UmsAdmin umsAdminParam) {
         UmsAdmin umsAdmin = new UmsAdmin();
         BeanUtils.copyProperties(umsAdminParam, umsAdmin);
-        umsAdmin.setId(this.getUmsAdminId());
+        umsAdmin.setId(getUmsAdminId());
         umsAdmin.setCreateTime(new Date());
         umsAdmin.setStatus(1);
         //查询是否有相同用户名的用户
@@ -65,7 +81,7 @@ public class UmsAdminServiceImpl implements UmsAdminService {
         return umsAdmin;
     }
 
-    private Long getUmsAdminId() {
+    private static Long getUmsAdminId() {
         long id = gerId.longValue();
         gerId.increment();
         return id;
