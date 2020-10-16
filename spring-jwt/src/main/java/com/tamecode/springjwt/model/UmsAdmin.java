@@ -2,6 +2,8 @@ package com.tamecode.springjwt.model;
 
 import lombok.Data;
 
+import java.util.Date;
+
 /**
  * 用户
  *
@@ -15,6 +17,8 @@ public class UmsAdmin {
     private String username;
     private String password;
     private Integer status;
+
+    private Date createTime;
 
 
 }

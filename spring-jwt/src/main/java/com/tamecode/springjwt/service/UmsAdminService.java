@@ -11,16 +11,25 @@ import java.util.List;
  */
 public interface UmsAdminService {
     /**
-     * 获取用户名
-     * @param username
-     * @return
+     * 根据用户名获取后台管理员
      */
     UmsAdmin getAdminByUsername(String username);
 
     /**
-     * 获取用户权限列表
-     * @param id
-     * @return
+     * 注册功能
      */
-    List<UmsPermission> getPermissionList(Long id);
+    UmsAdmin register(UmsAdmin umsAdminParam);
+
+    /**
+     * 登录功能
+     * @param username 用户名
+     * @param password 密码
+     * @return 生成的JWT的token
+     */
+    String login(String username, String password);
+
+    /**
+     * 获取用户所有权限（包括角色权限和+-权限）
+     */
+    List<UmsPermission> getPermissionList(Long adminId);
 }
