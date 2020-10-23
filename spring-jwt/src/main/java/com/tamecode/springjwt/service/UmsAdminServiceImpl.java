@@ -36,15 +36,17 @@ public class UmsAdminServiceImpl implements UmsAdminService {
     private static volatile ConcurrentHashMap<Long, List<UmsPermission>> permissionMap = new ConcurrentHashMap<>();
 
     static {
-        userMap.put("admin", new UmsAdmin(getUmsAdminId(), "admin", "123456", 1, new Date()));
-        userMap.put("test", new UmsAdmin(getUmsAdminId(), "test", "1234567", 1, new Date()));
-        permissionMap.put(1L, Arrays.asList(
+        // 123456 使用 org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder.encode 加密
+        userMap.put("admin", new UmsAdmin(getUmsAdminId(), "admin", "$2a$10$r378nNQguH9jlu2323Vmm.um7G8I0W63O8EksGgi4RRVAnjKW6rA6", 1, new Date()));
+        // 1234567
+        userMap.put("test", new UmsAdmin(getUmsAdminId(), "test", "$2a$10$MXwrjzr/tnGnURPpMk3oeOIQKzFnZQWZj6VEgRNrnu/IZa/yQTp4O", 1, new Date()));
+        permissionMap.put(0L, Arrays.asList(
                 new UmsPermission("pms:brand:read")
                 , new UmsPermission("pms:brand:create")
                 , new UmsPermission("pms:brand:update")
                 , new UmsPermission("pms:brand:delete")
         ));
-        permissionMap.put(2L, Collections.singletonList(
+        permissionMap.put(1L, Collections.singletonList(
                 new UmsPermission("pms:brand:read")
         ));
     }
