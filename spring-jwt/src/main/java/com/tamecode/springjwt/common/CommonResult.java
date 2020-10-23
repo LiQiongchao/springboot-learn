@@ -1,7 +1,5 @@
 package com.tamecode.springjwt.common;
 
-import lombok.Data;
-
 /**
  * 通用返回对象
  * @author Liqc

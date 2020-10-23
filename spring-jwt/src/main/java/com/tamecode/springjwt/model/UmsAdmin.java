@@ -24,5 +24,4 @@ public class UmsAdmin {
 
     private Date createTime;
 
-
 }

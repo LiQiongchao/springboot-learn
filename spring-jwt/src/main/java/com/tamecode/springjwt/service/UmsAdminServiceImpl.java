@@ -13,6 +13,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -37,9 +38,11 @@ public class UmsAdminServiceImpl implements UmsAdminService {
 
     static {
         // 123456 使用 org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder.encode 加密
-        userMap.put("admin", new UmsAdmin(getUmsAdminId(), "admin", "$2a$10$r378nNQguH9jlu2323Vmm.um7G8I0W63O8EksGgi4RRVAnjKW6rA6", 1, new Date()));
+        // BCryptPasswordEncoder 每次生成的结果是不一样的，因为使用了hash，但是结果中是可以提取出来salt值的。验证的时候是使用旧的
+        // salt 对用户密码进行加密再比较。
+        userMap.put("admin", new UmsAdmin(getUmsAdminId(), "admin", new BCryptPasswordEncoder().encode("123456"), 1, new Date()));
         // 1234567
-        userMap.put("test", new UmsAdmin(getUmsAdminId(), "test", "$2a$10$MXwrjzr/tnGnURPpMk3oeOIQKzFnZQWZj6VEgRNrnu/IZa/yQTp4O", 1, new Date()));
+        userMap.put("test", new UmsAdmin(getUmsAdminId(), "test", new BCryptPasswordEncoder().encode("1234567"), 1, new Date()));
         permissionMap.put(0L, Arrays.asList(
                 new UmsPermission("pms:brand:read")
                 , new UmsPermission("pms:brand:create")
