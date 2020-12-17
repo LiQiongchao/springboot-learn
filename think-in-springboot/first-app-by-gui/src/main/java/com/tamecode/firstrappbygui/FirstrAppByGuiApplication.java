@@ -1,5 +1,6 @@
 package com.tamecode.firstrappbygui;
 
+import com.tamecode.config.WebConfiguration;
 import org.springframework.boot.*;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -20,14 +21,18 @@ import static org.springframework.web.reactive.function.server.ServerResponse.ok
 /**
  * {@link SpringBootApplication#scanBasePackages()} 默认扫描类所在包下子包的所有配置类。
  */
-@SpringBootApplication(scanBasePackages = "com.tamecode.config")
+//@SpringBootApplication(scanBasePackages = "com.tamecode.config")
 /*@SpringBootConfiguration
 @EnableAutoConfiguration
 @ComponentScan*/
 public class FirstrAppByGuiApplication {
 
+    /**
+     * {@link SpringApplication#SpringApplication(Class[])} 的参数是 {@link SpringBootApplication} annotation 标注的类。
+     * @param args
+     */
     public static void main(String[] args) {
-        SpringApplication application = new SpringApplication(FirstrAppByGuiApplication.class);
+        SpringApplication application = new SpringApplication(WebConfiguration.class);
 //        application.setWebApplicationType(WebApplicationType.NONE);
         application.run(args);
 //        SpringApplication.run(FirstrAppByGuiApplication.class, args);
