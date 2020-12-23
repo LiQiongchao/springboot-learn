@@ -1,22 +1,11 @@
 package com.tamecode.firstrappbygui;
 
-import com.tamecode.config.WebConfiguration;
-import org.springframework.boot.*;
+import org.springframework.boot.ApplicationArguments;
+import org.springframework.boot.ApplicationRunner;
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.context.WebServerApplicationContext;
-import org.springframework.boot.web.context.WebServerInitializedEvent;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.event.EventListener;
-import org.springframework.web.reactive.function.server.RouterFunction;
-import org.springframework.web.reactive.function.server.ServerResponse;
-import reactor.core.publisher.Mono;
-
-import static org.springframework.web.reactive.function.server.RequestPredicates.GET;
-import static org.springframework.web.reactive.function.server.RouterFunctions.route;
-import static org.springframework.web.reactive.function.server.ServerResponse.ok;
 
 /**
  * {@link SpringBootApplication#scanBasePackages()} 默认扫描类所在包下子包的所有配置类。
@@ -25,6 +14,7 @@ import static org.springframework.web.reactive.function.server.ServerResponse.ok
 /*@SpringBootConfiguration
 @EnableAutoConfiguration
 @ComponentScan*/
+@EnableAutoConfiguration
 public class FirstrAppByGuiApplication {
 
     /**
@@ -32,10 +22,10 @@ public class FirstrAppByGuiApplication {
      * @param args
      */
     public static void main(String[] args) {
-        SpringApplication application = new SpringApplication(WebConfiguration.class);
+//        SpringApplication application = new SpringApplication(WebConfiguration.class);
 //        application.setWebApplicationType(WebApplicationType.NONE);
-        application.run(args);
-//        SpringApplication.run(FirstrAppByGuiApplication.class, args);
+//        application.run(args);
+        SpringApplication.run(FirstrAppByGuiApplication.class, args);
     }
 
 

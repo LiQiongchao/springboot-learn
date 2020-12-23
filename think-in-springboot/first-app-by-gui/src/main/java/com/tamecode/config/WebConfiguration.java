@@ -1,6 +1,5 @@
 package com.tamecode.config;
 
-import com.tamecode.firstrappbygui.FirstrAppByGuiApplication;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -24,8 +23,8 @@ import static org.springframework.web.reactive.function.server.ServerResponse.ok
  * @author Liqc
  * @date 2020/12/16 13:57
  */
-//@Configuration
-@SpringBootApplication
+@Configuration
+//@SpringBootApplication
 //@EnableAutoConfiguration
 public class WebConfiguration {
 
